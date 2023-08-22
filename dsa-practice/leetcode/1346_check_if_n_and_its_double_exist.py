@@ -33,3 +33,19 @@ class Solution:
                         return True
 
         return False
+        
+    def checkIfExistOn(arr):
+        hashtable = {}
+        
+        for num in arr:
+            hashtable[num] = hashtable.get(num,0) + 1
+            
+        for i in range(len(arr)):
+            if (2 * arr[i] in hashtable) or ((arr[i] // 2 in hashtable) and (arr[i] % 2 == 0)):
+                if arr[i] == 0:
+                    if hashtable.get(0,0) > 1:
+                        return True
+                else: 
+                    return True
+            
+        return False
