@@ -48,9 +48,48 @@ def duplicates_using_negative_marking(nums: List[int]) -> int:
             return num
         nums[num] = -nums[num]
 
+def duplicates_using_hare_tortoise(nums: List[int]) -> int:
+    """
+    This method will work when the array is immutable and we still need to achieve O(n) Time and O(1) Space complexity
+    
+    We detect the start point of loop in the list with a linking rule nums[i] -> nums[nums[i]]
+    The Hare moves with twice the speed of tortoise . So hare = nums[nums[hare]] while tortoise = nums[tortoise]
+    at each updation step. If they collide there is a loop in the linked list with the above rule,
+    and hence, a duplicate in the array. The start point of the loop will be our duplicate element.
+    """
+
+    # Initialise variables
+    tortoise = nums[0]
+    hare = nums[0]
+ 
+    # Loop till we find the
+    # duplicate element
+    while (1):
+ 
+        tortoise = nums[tortoise]
+ 
+        # Hare moves with twice
+        # the speed of tortoise
+        hare = nums[nums[hare]]
+        if (tortoise == hare):
+            break
+ 
+    tortoise = nums[0]
+ 
+    # Loop to get start point
+    # of the cycle as start
+    # point will be the duplicate
+    # element
+    while (tortoise != hare):
+        tortoise = nums[tortoise]
+        hare = nums[hare]
+        
+    return tortoise
+
 
 # Tests
 nums = [1, 2, 3, 4, 4, 5]
 print("duplicates_using_sort", duplicates_using_sort(nums))
 print("duplicates_using_set", duplicates_using_set(nums))
 print("duplicates_using_negative_marking", duplicates_using_negative_marking(nums))
+print("duplicates_using_hare_tortoise", duplicates_using_hare_tortoise(nums))
